@@ -1,0 +1,41 @@
+{
+    "timestamp": "2022-09-22T18:26:29.475694Z",
+    "hash": "0xa0e1880cebcf814e7f567d8ae5dca23f1f6d9a3ac9a4160de565fdf8f390a558",
+    "owner": "0x701bef15165c660ef27807b8f91c3543756c416a",
+    "address_from": "0x701bef15165c660ef27807b8f91c3543756c416a",
+    "address_to": "0xe126b3e5d052f1f575828f61feba4f4f2603652a",
+    "network": "zksync",
+    "platform": "Gitcoin",
+    "tag": "donation",
+    "type": "donate",
+    "success": true,
+    "actions": [
+        {
+            "tag": "donation",
+            "type": "donate",
+            "index": -1,
+            "address_from": "0x701bef15165c660ef27807b8f91c3543756c416a",
+            "address_to": "0xe126b3e5d052f1f575828f61feba4f4f2603652a",
+            "metadata": {
+                "logo": "https://d31ygswzsyecnt.cloudfront.net/grants/5a63ab306e96b5fac1583b60644eb335/revoke-card.png",
+                "title": "Revoke.cash - Helping you stay safe in web3",
+                "token": {
+                    "name": "Ethereum",
+                    "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
+                    "value": "1500000000000000",
+                    "symbol": "ETH",
+                    "decimals": 18,
+                    "standard": "Native",
+                    "value_display": "0.0015"
+                },
+                "platform": "Gitcoin",
+                "description": "Hey all, welcome to Revoke.cash' Gitcoin Grant, we're building free and open source tools to help you stay safe in web3! 👋\r\n\r\nTo use tokens in decentralised applications such as Uniswap or OpenSea you have to grant the application permission to spend tokens on your behalf - known as an allowance. Allowances are an important part of using these apps, but can be dangerous if left unchecked.\r\n\r\nBugs can exists and exploits can happen even in established projects, and by approving token allowances you are potentially exposing your wallet to these exploits. To keep yourself safe from allowance exploits it is a good practice to regularly inspect and revoke your allowances.\r\n\r\nRevoke.cash comes in as a preventative tool to manage your token allowances and practice proper wallet hygiene. By regularly revoking active allowances you reduce the chances of becoming the victim of allowance exploits.\r\n\r\nIn many cases, phishing websites try to make you sign an allowance while they pretend to be an NFT mint or other legitimate use cases. When these phishing scams happen, it is recommended to use Revoke.cash to mitigate the damage, but it is even better to prevent the scam in the first place.\r\n\r\nThis is where the Revoke.cash Browser Extension comes in. The extension pops up whenever you are about to sign an allowance and will inform you of the allowance details. This can help you prevent signing malicious allowances."
+            },
+            "platform": "Gitcoin",
+            "related_urls": [
+                "https://zkscan.io/explorer/transactions/0xa0e1880cebcf814e7f567d8ae5dca23f1f6d9a3ac9a4160de565fdf8f390a558",
+                "https://gitcoin.co/grants259/revokecash-helping-you-stay-safe-in-web3"
+            ]
+        }
+    ]
+}
