@@ -16,10 +16,6 @@ RSS3 response payloads have categorized user actions by tags, with each tag furt
     a. Transfer: A Simple Transfer transaction from one address to another. Sample payload [is available here](./data-schemas/transaction_transfer.json)\
     b. Mint: A Sample Mint Transaction from an address to some contract address that is able to mint tokens. Sample payload [is available here](./data-schemas/transaction_mint.json)\
     c. Burn: A Simple Burn Transaction from an address to some contract address that is able to burn tokens. \
-<<<<<<< Updated upstream
-\
-=======
->>>>>>> Stashed changes
 
 2. *Exchange Tag*: Various types (steps in the user journey) for Exchange tag are defined below with reference to sample payloads:\
     a. Deposit:\
@@ -28,15 +24,6 @@ RSS3 response payloads have categorized user actions by tags, with each tag furt
     d. Liquidity: Indicates an aciton of adding/removing assets to/from a liquidity pool. Sample Payload [is available here](./data-schemas/exchange_liquidity.json)\
     e. Bridge:\
 
-<<<<<<< Updated upstream
-3. *Collectible Tag*: Various types (steps in the user journey) for Collectible tag are defined below with reference to sample payloads:
-    a. Transfer: A Simple Transfer action of a collectible
-    b. Mint: A Simple Minting action of a collectible. Sample Payload [is available here](./data-schemas/collectible_mint.json)
-    c. Burn: A Simple Burn action of a collectible
-4. *Donation Tag*: Various types (steps in the user journey) for Donation tag are defined below with reference to sample payloads:
-    a. Launch: Indicates an action of launching a new grant.
-    b. Donate: Indicates a token transfer to an established grant. Sample payload [is available here](./data-schemas/donation_donate.json)
-=======
 3. *Collectible Tag*: Various types (steps in the user journey) for Collectible tag are defined below with reference to sample payloads:\
     a. Transfer: A Simple Transfer action of a collectible\
     b. Mint: A Simple Minting action of a collectible. Sample Payload [is available here](./data-schemas/collectible_mint.json)\
@@ -45,4 +32,3 @@ RSS3 response payloads have categorized user actions by tags, with each tag furt
 4. *Donation Tag*: Various types (steps in the user journey) for Donation tag are defined below with reference to sample payloads:\
     a. Launch: Indicates an action of launching a new grant.\
     b. Donate: Indicates a token transfer to an established grant. Sample payload [is available here](./data-schemas/donation_donate.json)\
->>>>>>> Stashed changes
