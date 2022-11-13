@@ -12,10 +12,11 @@ We plan to achieve user journeys for all transactions for any user, supplemented
 ### Users' Actions defined in the project (by tag)
 RSS3 response payloads have categorized user actions by tags, with each tag further subdivided into types. Following is the list of tags that show define a user journey, with every type of transaction (within a tag) defining a step in the journey. 
 
-1. *Transactions Tag*: Various types (steps in the user journey) for Transactions tag are defined below with reference to the sample payloads:
-    a. Transfer: A Simple Transfer transaction from one address to another. Sample payload [is available here](./data-schemas/transaction_transfer.json)
-    b. Mint: A Sample Mint Transaction from an address to some contract address that is able to mint tokens. Sample payload [is available here](./data-schemas/transaction_mint.json)
-    c. Burn: A Simple Burn Transaction from an address to some contract address that is able to burn tokens. 
+1. *Transactions Tag*: Various types (steps in the user journey) for Transactions tag are defined below with reference to the sample payloads:\
+    a. Transfer: A Simple Transfer transaction from one address to another. Sample payload [is available here](./data-schemas/transaction_transfer.json)\
+    b. Mint: A Sample Mint Transaction from an address to some contract address that is able to mint tokens. Sample payload [is available here](./data-schemas/transaction_mint.json)\
+    c. Burn: A Simple Burn Transaction from an address to some contract address that is able to burn tokens. \
+\
 
 2. *Exchange Tag*: Various types (steps in the user journey) for Exchange tag are defined below with reference to sample payloads:
     a. Deposit:
