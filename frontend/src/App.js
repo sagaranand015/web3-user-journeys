@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { GetData } from './client'
 
 function App() {
 
@@ -39,11 +40,15 @@ function App() {
     isWalletConnected();
   }, []);
 
+  async function TryGetData() {
+    await GetData("0x701bef15165c660ef27807b8f91c3543756c416a", "t1", "t2");
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <button onClick={connectWalletHandler}>Connect Wallet</button>
-        {/* <button onClick={connectWalletHandler}>Connect Wallet</button> */}
+        <button onClick={TryGetData}>Try Get Data</button>
       </header>
     </div>
   );
