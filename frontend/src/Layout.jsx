@@ -6,8 +6,7 @@ import { useForm } from 'react-hook-form';
 // hardcode some wallets because when we call eth_requestAccounts we typically only get 1 address back
 const initial = [
   {
-    address: '0x701bef15165c660ef27807b8f91c3543756c416a',
-    current: true
+    address: '0x701bef15165c660ef27807b8f91c3543756c416a'
   }
 ];
 
@@ -15,14 +14,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Layout = ({ children, currentAccount }) => {
+const Layout = ({ children, currentAccount, setCurrentAccount }) => {
   const { register, handleSubmit } = useForm();
   const [currentAccounts, setCurrentAccounts] = useState(initial);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Adding extra wallets here
   const onSubmit = (data) => {
-    setCurrentAccounts((prev) => [...prev, { address: data.ethAddress, current: true }]);
+    setCurrentAccounts((prev) => [...prev, { address: data.ethAddress }]);
   };
 
   return (
@@ -85,6 +84,7 @@ const Layout = ({ children, currentAccount }) => {
                       {currentAccounts.map((item) => (
                         <button
                           key={item.address}
+                          onClick={() => setCurrentAccount(item.address)}
                           className={classNames(
                             item.current
                               ? 'bg-teal-800 text-white'
@@ -143,6 +143,7 @@ const Layout = ({ children, currentAccount }) => {
                 {currentAccounts.map((item) => (
                   <button
                     key={item.address}
+                    onClick={() => setCurrentAccount(item.address)}
                     className={classNames(
                       item.current
                         ? 'bg-teal-800 text-white'
