@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Activity from './Activity';
-import { GetData } from './client';
+import { GetCollectibleMint, GetDonationDonate, GetExchangeLiquidity, GetExchangeSwap, GetTransactionMint, GetTransactionTransfer } from './client';
 import Layout from './Layout';
 
 // function classNames(...classes) {
@@ -45,7 +45,12 @@ function App() {
 
     async function tryGetData() {
         try {
-            await GetData('0x701bef15165c660ef27807b8f91c3543756c416a', 't1', 't2');
+            await GetTransactionMint('0x701bef15165c660ef27807b8f91c3543756c416a');
+            await GetTransactionTransfer('0x701bef15165c660ef27807b8f91c3543756c416a');
+            await GetExchangeSwap('0x701bef15165c660ef27807b8f91c3543756c416a');
+            await GetExchangeLiquidity('0x701bef15165c660ef27807b8f91c3543756c416a');
+            await GetDonationDonate('0x701bef15165c660ef27807b8f91c3543756c416a');
+            await GetCollectibleMint('0x701bef15165c660ef27807b8f91c3543756c416a');
         } catch (err) {
             console.error('err', err);
         }
