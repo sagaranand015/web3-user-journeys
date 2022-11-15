@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Activity from './Activity';
-import { GetCollectibleMint, GetDonationDonate, GetExchangeLiquidity, GetExchangeSwap, GetTransactionMint, GetTransactionTransfer } from './client';
+import {
+  GetCollectibleMint,
+  GetDonationDonate,
+  GetExchangeLiquidity,
+  GetExchangeSwap,
+  GetTransactionMint,
+  GetTransactionTransfer
+} from './client';
 import Layout from './Layout';
 
 // function classNames(...classes) {
@@ -8,83 +15,75 @@ import Layout from './Layout';
 // }
 
 function App() {
-    const [currentAccount, setCurrentAccount] = useState(null);
+  const [currentAccount, setCurrentAccount] = useState(null);
+  const [activities, setActivities] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    const connectWalletHandler = async () => {
-        const { ethereum } = window;
-        if (!ethereum) {
-            alert('Please Install Metamask');
-        }
-        try {
-            await ethereum
-                .request({ method: 'eth_requestAccounts' })
-                .then(function (accounts) {
-                    setCurrentAccount(accounts[0]);
-                    console.log(
-                        '======= Wallet connected, got the address: ',
-                        accounts[0],
-                    );
-                });
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        const isWalletConnected = async () => {
-            if (window.ethereum) {
-                await window.ethereum
-                    .request({ method: 'eth_requestAccounts' })
-                    .then(function (accounts) {
-                        setCurrentAccount(accounts[0]);
-                    });
-            }
-        };
-        isWalletConnected();
-    }, []);
-
-    async function tryGetData() {
-        try {
-            await GetTransactionMint('0x701bef15165c660ef27807b8f91c3543756c416a');
-            await GetTransactionTransfer('0x701bef15165c660ef27807b8f91c3543756c416a');
-            await GetExchangeSwap('0x701bef15165c660ef27807b8f91c3543756c416a');
-            await GetExchangeLiquidity('0x701bef15165c660ef27807b8f91c3543756c416a');
-            await GetDonationDonate('0x701bef15165c660ef27807b8f91c3543756c416a');
-            await GetCollectibleMint('0x701bef15165c660ef27807b8f91c3543756c416a');
-        } catch (err) {
-            console.error('err', err);
-        }
+  const connectWallet = async () => {
+    const { ethereum } = window;
+    if (!ethereum) {
+      alert('Please Install Metamask');
     }
+    try {
+      await ethereum.request({ method: 'eth_requestAccounts' }).then(function (accounts) {
+        setCurrentAccount(accounts[0]);
+        console.log('======= Wallet connected, got the address: ', accounts[0]);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    return (
-        <Layout currentAccount={currentAccount}>
-            <div className="py-6">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                    <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-                </div>
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                    <div className="py-4">
-                        <button
-                            onClick={connectWalletHandler}
-                            type="button"
-                            className="mr-4 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        >
-                            connect wallet
-                        </button>
-                        <button
-                            onClick={tryGetData}
-                            type="button"
-                            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        >
-                            get data
-                        </button>
-                    </div>
+  useEffect(() => {
+    const isWalletConnected = async () => {
+      if (window.ethereum) {
+        await window.ethereum.request({ method: 'eth_requestAccounts' }).then(function (accounts) {
+          setCurrentAccount(accounts[0]);
+        });
+      }
+    };
+    isWalletConnected();
+  }, []);
 
-                    <Activity />
-                </div>
-            </div>
-        </Layout>
-    );
+  useEffect(() => {
+    tryGetData();
+  }, [currentAccount]);
+
+  async function tryGetData() {
+    try {
+      setLoading(true);
+      const txMint = await GetTransactionMint('0x701bef15165c660ef27807b8f91c3543756c416a');
+      const txTransfer = await GetTransactionTransfer('0x701bef15165c660ef27807b8f91c3543756c416a');
+      const exSwap = await GetExchangeSwap('0x701bef15165c660ef27807b8f91c3543756c416a');
+      const exLiquidity = await GetExchangeLiquidity('0x701bef15165c660ef27807b8f91c3543756c416a');
+      const donation = await GetDonationDonate('0x701bef15165c660ef27807b8f91c3543756c416a');
+      const colMint = await GetCollectibleMint('0x701bef15165c660ef27807b8f91c3543756c416a');
+      setActivities({
+        txMint: txMint.result,
+        txTransfer: txTransfer.result,
+        exSwap: exSwap.result,
+        exLiquidity: exLiquidity.result,
+        donation: donation.result,
+        colMint: colMint.result
+      });
+      setLoading(false);
+    } catch (err) {
+      console.error('err', err);
+    }
+  }
+
+  return (
+    <Layout currentAccount={currentAccount} connectWallet={connectWallet}>
+      <div className="py-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+          <h1 className="text-2xl font-semibold text-gray-900">Wallet Activity</h1>
+        </div>
+        <div className="mt-8 mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+          <Activity activities={activities} />
+        </div>
+      </div>
+    </Layout>
+  );
 }
 
 export default App;

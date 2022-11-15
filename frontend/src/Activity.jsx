@@ -1,72 +1,68 @@
 import React from 'react';
+import { useState } from 'react';
 
-const people = [
-    {
-        name: 'Lindsay Walton',
-        imageUrl:
-            'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80',
-    },
-    {
-        name: 'Jeff Smith',
-        imageUrl:
-            'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80',
-    },
-    // More people...
-];
-const activityItems = [
-    {
-        id: 1,
-        person: people[0],
-        project: 'Workcation',
-        item: 'Sent 0.1 ETH to ______',
-        environment: 'production',
-        time: '1h',
-    },
-    {
-        id: 2,
-        person: people[1],
-        project: 'Sup',
-        item: 'Received 0.4 poly from ______',
-        environment: 'staging',
-        time: '2h',
-    },
-    // More items...
-];
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
 
-const Activity = () => {
-    return (
-        <div>
-            {' '}
-            <div>
-                <ul className="divide-y divide-gray-200">
-                    {activityItems.map((activityItem) => (
-                        <li key={activityItem.id} className="py-4">
-                            <div className="flex space-x-3">
-                                <img
-                                    className="h-6 w-6 rounded-full"
-                                    src={activityItem.person.imageUrl}
-                                    alt=""
-                                />
-                                <div className="flex-1 space-y-1">
-                                    <div className="flex items-center justify-between">
-                                        <h3 className="text-sm font-medium">
-                                            {activityItem.person.name}
-                                        </h3>
-                                        <p className="text-sm text-gray-500">
-                                            {activityItem.time}
-                                        </p>
-                                    </div>
-                                    <p className="text-sm text-gray-500">
-                                        {activityItem.item}
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
+const Activity = ({ activities }) => {
+  const [view, setView] = useState('txTransfer');
+
+  const tabs = [
+    { name: 'Transaction Transfer', value: 'txTransfer', current: view === 'txTransfer' },
+    { name: 'Transaction Mint', value: 'txMint', current: view === 'txMint' },
+    { name: 'Exchange Swap', value: 'exSwap', current: view === 'exSwap' },
+    { name: 'Exchange Liquidity', value: 'exLiquidity', current: view === 'exLiquidity' },
+    { name: 'Collection', value: 'colMint', current: view === 'colMint' },
+    { name: 'Donation', value: 'donation', current: view === 'donation' }
+  ];
+
+  console.log(activities);
+
+  return (
+    <div>
+      <nav className="flex space-x-4 mb-4" aria-label="Tabs">
+        {tabs.map((tab) => (
+          <button
+            key={tab.name}
+            onClick={() => setView(tab.value)}
+            className={classNames(
+              tab.current ? 'bg-teal-100 text-teal-700' : 'text-gray-500 hover:text-gray-700',
+              'px-3 py-2 font-medium text-sm rounded-md'
+            )}
+            aria-current={tab.current ? 'page' : undefined}
+          >
+            {tab.name}
+          </button>
+        ))}
+      </nav>
+
+      {activities ? (
+        <ul className="divide-y divide-gray-200">
+          {activities[view].map((a) => (
+            <li key={a.hash} className="py-4">
+              <div className="flex space-x-3">
+                <img className="h-6 w-6 rounded-full" src={a.actions[0].metadata.image} alt="" />
+                <div className="flex-1 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-medium">
+                      {a.address_from.substring(0, 8) + '...'}
+                      <span className='font-normal'> sent to </span>
+                      {a.address_to.substring(0, 8) + '...'}
+                    </h3>
+                    <p className="text-sm text-gray-500">{new Date(a.timestamp).toDateString()}</p>
+                  </div>
+                  <p className="text-sm text-gray-500">network: {a.network}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Fetching activity..</p>
+      )}
+    </div>
+  );
 };
 
 export default Activity;

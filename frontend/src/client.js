@@ -10,7 +10,7 @@ export async function GetData(address, tag, type) {
             'accept': 'application/json'
         }
     );
-    console.log("======= response is: ", response);
+    // console.log("======= response is: ", response);
     return response;
 }
 
