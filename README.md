@@ -3,7 +3,7 @@
 Web3-Journeys is a project that aims to implement cross-chain web3 user journeys for all transactions and actions done by the user with various other individuals and institutions. This projects gives an insightful report into everything you do on blockchain in a cross chain fashion. 
 
 ### Project Plan
-We plan to achieve user journeys for all transactions for any user, supplemented with a reporting dashboard for an overall insight into cross-chain fund transactions, ENS trnsactions, social transactions and so on. The project will have a dashboard and a journey page integrated to guide user through the various trnsaction stats. 
+We plan to achieve user journeys for all transactions for any user, supplemented with a reporting dashboard for an overall insight into cross-chain fund transactions, ENS trnsactions, social transactions and so on. The project will have a dashboard and a journey page integrated to guide user through the various transaction stats. 
 
 ### User Workflows
 1. A User Journey Page: A Page should describes the various trnsactions based on a predefined JSON based Metadata schema as defined by RSS3
