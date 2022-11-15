@@ -6,9 +6,14 @@ import { useForm } from 'react-hook-form';
 // hardcode some wallets because when we call eth_requestAccounts we typically only get 1 address back
 const initial = [
   {
-    address: '0x701bef15165c660ef27807b8f91c3543756c416a'
+    address: '0x9A9B3fBb7c83D82E7cF696d6F2ecCa35Ba00C356'
   }
 ];
+
+const shortenAddress = (address) => {
+  if (address)
+    return address.substring(0, 6) + "..." + address.substring(address.length - 4, address.length)
+}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -92,7 +97,8 @@ const Layout = ({ children, currentAccount, setCurrentAccount }) => {
                             'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                           )}
                         >
-                          {item.address.substring(0, 16) + '...'}
+                          {/* {item.address.substring(0, 16) + '...'} */}
+                          {shortenAddress(item.address)}
                         </button>
                       ))}
                     </nav>
@@ -109,7 +115,8 @@ const Layout = ({ children, currentAccount, setCurrentAccount }) => {
                         </div>
                         <div className="ml-3">
                           <p className="text-base font-medium text-white">
-                            {currentAccount?.substring(0, 16) + '...'}
+                            {/* {currentAccount?.substring(0, 16) + '...'} */}
+                            {shortenAddress(currentAccount)}
                           </p>
                           <p className="text-sm font-medium text-teal-200 group-hover:text-white">
                             View profile
@@ -151,7 +158,8 @@ const Layout = ({ children, currentAccount, setCurrentAccount }) => {
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-2'
                     )}
                   >
-                    {item.address.substring(0, 16) + '...'}
+                    {/* {item.address.substring(0, 16) + '...'} */}
+                    {shortenAddress(item.address)}
                   </button>
                 ))}
               </nav>
