@@ -33,6 +33,20 @@ RSS3 response payloads have categorized user actions by tags, with each tag furt
     a. Launch: Indicates an action of launching a new grant.\
     b. Donate: Indicates a token transfer to an established grant. Sample payload [is available here](./data-schemas/donation_donate.json)\
 
+## Running the project
+1. Clone the git repo and navigate to the frontend directory
+```
+cd frontend
+```
+2. Install dependencies
+```
+npm install
+```
+3. Run the frontend
+```
+npm start
+```
+
 ## Live App Demo
 https://willowy-melomakarona-76b962.netlify.app
 
