@@ -181,7 +181,7 @@ const Layout = ({ children, currentAccount, setCurrentAccount }) => {
                   className="flex rounded-full px-4 py-2 mt-4 items-center justify-center border border-transparent bg-orange-300 text-center text-md font-semibold leading-4 text-cyan-700 shadow-sm hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   <PlusIcon className="w-5 h-5 mr-1" />
-                  Add Wallet
+                  Add Address
                 </button>
               </form>
             </div>
