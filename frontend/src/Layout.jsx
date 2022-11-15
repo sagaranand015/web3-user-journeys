@@ -1,6 +1,7 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Bars3Icon, PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useForm } from 'react-hook-form';
 
 // hardcode some wallets because when we call eth_requestAccounts we typically only get 1 address back
 const initial = [
@@ -14,9 +15,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Layout = ({ children, currentAccount, connectWallet }) => {
-  const [currentAccounts] = useState(initial);
+const Layout = ({ children, currentAccount }) => {
+  const { register, handleSubmit } = useForm();
+  const [currentAccounts, setCurrentAccounts] = useState(initial);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Adding extra wallets here
+  const onSubmit = (data) => {
+    setCurrentAccounts((prev) => [...prev, { address: data.ethAddress, current: false }]);
+  };
 
   return (
     <>
@@ -147,16 +154,29 @@ const Layout = ({ children, currentAccount, connectWallet }) => {
                   </button>
                 ))}
               </nav>
-              <button
-                onClick={connectWallet}
-                type="button"
-                className="mx-4 py-4 rounded-full inline-flex items-center justify-center border border-transparent bg-gray-100 text-center text-md font-semibold leading-4 text-cyan-700 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                <PlusIcon className="w-5 h-5 mr-1" />
-                Connect Wallet
-              </button>
+              <form className="px-4" onSubmit={handleSubmit(onSubmit)}>
+                <label htmlFor="email" className="block text-base font-medium text-gray-100">
+                  Add a wallet address
+                </label>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    {...register('ethAddress')}
+                    id="ethAddress"
+                    className="block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    placeholder="0x000000000000"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="flex rounded-full px-4 py-2 mt-4 items-center justify-center border border-transparent bg-orange-300 text-center text-md font-semibold leading-4 text-cyan-700 shadow-sm hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  <PlusIcon className="w-5 h-5 mr-1" />
+                  Add Wallet
+                </button>
+              </form>
             </div>
-            <div className="flex flex-shrink-0 border-t border-teal-800 p-4">
+            {/* <div className="flex flex-shrink-0 border-t border-teal-800 p-4">
               <a href="/" className="group block w-full flex-shrink-0">
                 <div className="flex items-center">
                   <div>
@@ -172,7 +192,7 @@ const Layout = ({ children, currentAccount, connectWallet }) => {
                   </div>
                 </div>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex flex-1 flex-col md:pl-64">
