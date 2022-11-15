@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { GetData } from './client';
 import { Dialog, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -19,51 +18,9 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
 }
 
-function App() {
-    const [currentAccount, setCurrentAccount] = useState(null);
-    const [currentAccounts, setCurrentAccounts] = useState(initial);
+const Layout = ({ children, currentAccount }) => {
+    const [currentAccounts] = useState(initial);
     const [sidebarOpen, setSidebarOpen] = useState(false);
-
-    const connectWalletHandler = async () => {
-        const { ethereum } = window;
-        if (!ethereum) {
-            alert('Please Install Metamask');
-        }
-        try {
-            await ethereum
-                .request({ method: 'eth_requestAccounts' })
-                .then(function (accounts) {
-                    setCurrentAccount(accounts[0]);
-                    console.log(
-                        '======= Wallet connected, got the address: ',
-                        accounts[0],
-                    );
-                });
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        const isWalletConnected = async () => {
-            if (window.ethereum) {
-                await window.ethereum
-                    .request({ method: 'eth_requestAccounts' })
-                    .then(function (accounts) {
-                        setCurrentAccount(accounts[0]);
-                    });
-            }
-        };
-        isWalletConnected();
-    }, []);
-
-    async function tryGetData() {
-        try {
-            await GetData('0x701bef15165c660ef27807b8f91c3543756c416a', 't1', 't2');
-        } catch (err) {
-            console.error('err', err);
-        }
-    }
 
     return (
         <>
@@ -142,7 +99,8 @@ function App() {
                                                         'group flex items-center px-2 py-2 text-base font-medium rounded-md',
                                                     )}
                                                 >
-                                                    {item.address.substring(0, 16) + '...'}
+                                                    {item.address.substring(0, 16) +
+                                                        '...'}
                                                 </button>
                                             ))}
                                         </nav>
@@ -159,15 +117,18 @@ function App() {
                                                 </div>
                                                 <div className="ml-3">
                                                     <p className="text-base font-medium text-white">
-                                                        {currentAccount?.substring(0, 16) +
-                                                            '...'}
+                                                        {currentAccount?.substring(
+                                                            0,
+                                                            16,
+                                                        ) + '...'}
                                                     </p>
                                                     <p className="text-sm font-medium text-teal-200 group-hover:text-white">
                                                         View profile
                                                     </p>
                                                 </div>
                                             </div>
-                                        </a>?
+                                        </a>
+                                        ?
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
@@ -240,39 +201,11 @@ function App() {
                             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                         </button>
                     </div>
-                    <main className="flex-1">
-                        <div className="py-6">
-                            <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                                <h1 className="text-2xl font-semibold text-gray-900">
-                                    Dashboard
-                                </h1>
-                            </div>
-                            <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                                {/* Replace with your content */}
-                                <div className="py-4">
-                                    <button
-                                        onClick={connectWalletHandler}
-                                        type="button"
-                                        className="mr-4 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                    >
-                                        connect wallet
-                                    </button>
-                                    <button
-                                        onClick={tryGetData}
-                                        type="button"
-                                        className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                    >
-                                        get data
-                                    </button>
-                                </div>
-                                {/* /End replace */}
-                            </div>
-                        </div>
-                    </main>
+                    <main className="flex-1">{children}</main>
                 </div>
             </div>
         </>
     );
-}
+};
 
-export default App;
+export default Layout;
