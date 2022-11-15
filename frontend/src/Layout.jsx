@@ -22,7 +22,7 @@ const Layout = ({ children, currentAccount }) => {
 
   // Adding extra wallets here
   const onSubmit = (data) => {
-    setCurrentAccounts((prev) => [...prev, { address: data.ethAddress, current: false }]);
+    setCurrentAccounts((prev) => [...prev, { address: data.ethAddress, current: true }]);
   };
 
   return (

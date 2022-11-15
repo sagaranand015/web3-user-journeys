@@ -5,6 +5,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
+const shortenAddress = (address) => {
+  if (address)
+    return address.substring(0, 6) + "..." + address.substring(address.length - 4, address.length)
+}
+
 const Activity = ({ activities }) => {
   const [view, setView] = useState('txTransfer');
 
@@ -46,9 +51,11 @@ const Activity = ({ activities }) => {
                 <div className="flex-1 space-y-1">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-medium">
-                      {a.address_from.substring(0, 8) + '...'}
+                      {shortenAddress(a.address_from)}
+                      {/* {a.address_from.substring(0, 8) + '...'} */}
                       <span className='font-normal'> sent to </span>
-                      {a.address_to.substring(0, 8) + '...'}
+                      {shortenAddress(a.address_to)}
+                      {/* {a.address_to.substring(0, 8) + '...'} */}
                     </h3>
                     <p className="text-sm text-gray-500">{new Date(a.timestamp).toDateString()}</p>
                   </div>
