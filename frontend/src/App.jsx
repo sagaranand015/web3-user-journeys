@@ -16,7 +16,7 @@ import Layout from './Layout';
 
 function App() {
     const [currentAccount, setCurrentAccount] = useState(
-        '0x701bef15165c660ef27807b8f91c3543756c416a'
+        '0x9A9B3fBb7c83D82E7cF696d6F2ecCa35Ba00C356'
     );
     const [activities, setActivities] = useState(null);
     const [loading, setLoading] = useState(false);
